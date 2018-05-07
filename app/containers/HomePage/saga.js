@@ -2,8 +2,9 @@
 
 import request from 'utils/request';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { LOAD_TODOS, ADD_TODOS } from 'containers/HomePage/constants';
-import { todosLoaded, todoLoadingError, addTodoSuccess, addTodoError } from './actions';
+import { LOAD_TODOS, ADD_TODOS, DELETE_TODOS } from 'containers/HomePage/constants';
+import { todosLoaded, todoLoadingError, addTodoSuccess, addTodoError,
+  deleteTodoSuccess, deleteTodoError } from './actions';
 
 const backendUrl = 'http://localhost:3000';
 
@@ -31,9 +32,25 @@ export function* fetchAddTodos(action) {
   }
 }
 
+export function* fetchDeleteTodos(action) {
+  try {
+    yield call(request, `${backendUrl}/todos/${action.todoId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const todos = yield call(request, `${backendUrl}/todos`);
+    yield put(deleteTodoSuccess(todos));
+  } catch (err) {
+    yield put(deleteTodoError('Page Not Found'));
+  }
+}
+
 export default function* rootSaga() {
   yield [
     takeLatest(LOAD_TODOS, fetchTodos),
     takeLatest(ADD_TODOS, fetchAddTodos),
+    takeLatest(DELETE_TODOS, fetchDeleteTodos),
   ];
 }

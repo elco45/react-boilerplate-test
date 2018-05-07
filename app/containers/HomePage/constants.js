@@ -4,3 +4,6 @@ export const LOAD_TODOS_ERROR = 'app/HomePage/LOAD_TODOS_ERROR';
 export const ADD_TODOS = 'app/HomePage/ADD_TODOS';
 export const ADD_TODOS_SUCCESS = 'app/HomePage/ADD_TODOS_SUCCESS';
 export const ADD_TODOS_ERROR = 'app/HomePage/ADD_TODOS_ERROR';
+export const DELETE_TODOS = 'app/HomePage/DELETE_TODOS';
+export const DELETE_TODOS_SUCCESS = 'app/HomePage/DELETE_TODOS_SUCCESS';
+export const DELETE_TODOS_ERROR = 'app/HomePage/DELETE_TODOS_ERROR';

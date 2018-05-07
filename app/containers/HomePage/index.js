@@ -51,7 +51,8 @@ export class HomePage extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   componentDidMount() {
@@ -76,9 +77,13 @@ export class HomePage extends React.Component {
     this.setState({ currentTask });
   }
 
-  handleClick() {
+  handleAddClick() {
     this.props.actions.addTodo(this.state.currentTask);
     this.setState({ currentTask: '' });
+  }
+
+  handleDeleteClick(todoId) {
+    this.props.actions.deleteTodo(todoId);
   }
 
   renderForm() {
@@ -94,7 +99,7 @@ export class HomePage extends React.Component {
             value={this.state.currentTask}
             onChange={this.handleInputChange}
           />
-          <TaskButton onClick={this.handleClick}>
+          <TaskButton onClick={this.handleAddClick}>
             Add
           </TaskButton>
         </div>
@@ -119,7 +124,17 @@ export class HomePage extends React.Component {
               <tr
                 key={`r-${index}`} // eslint-disable-line
               >
-                <td>{todo.name}</td>
+                <td className="row">
+                  <span className="col"> {todo.name} </span>
+
+                  <button
+                    type="button"
+                    className="btn btn-danger ml-auto"
+                    onClick={() => this.handleDeleteClick(todo.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))
           }

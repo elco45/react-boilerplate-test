@@ -39,3 +39,23 @@ export function addTodoError() {
     type: ActionContents.ADD_TODOS_ERROR,
   };
 }
+
+export function deleteTodo(todoId) {
+  return {
+    type: ActionContents.DELETE_TODOS,
+    todoId,
+  };
+}
+
+export function deleteTodoSuccess(todos) {
+  return {
+    type: ActionContents.DELETE_TODOS_SUCCESS,
+    todos,
+  };
+}
+
+export function deleteTodoError() {
+  return {
+    type: ActionContents.DELETE_TODOS_ERROR,
+  };
+}
